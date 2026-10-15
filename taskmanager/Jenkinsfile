@@ -1,0 +1,46 @@
+pipeline{
+    agent any
+
+    stages
+    {
+        stage('checkout')
+        {
+            steps
+            {
+                checkout scm
+            }
+        }
+
+        stage('check node and npm')
+        {
+            steps
+            {
+                bat 'node-v'
+                bat 'npm-v'
+            }
+        }
+
+        stage('install dependencies')
+        {
+            steps
+            {
+                bat 'npm install'
+            }
+        }
+
+        stage('build')
+        {
+            steps
+            {
+                bat 'npm run build'
+            }
+        }
+        stage('test')
+        {
+            steps
+            {
+                bat 'npm test'
+            }
+        }
+    }
+}
